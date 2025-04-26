@@ -1,0 +1,364 @@
+/* Base Styles */
+body {
+  background-color: #f5f5f5;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding-top: 65px; /* Adjust this value to match the height of the navbar */
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* navigation */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FAF1F3;
+  padding: 15px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.logo {
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.logo .practicum {
+  color: #F15377;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  margin-left: auto;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.nav-links li {
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+  padding: 5px 10px;
+}
+
+.nav-links a:hover {
+  color: #da627d;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .navbar {
+    justify-content: center;
+  }
+}
+
+/* ===== SIGNUP CARD ===== */
+.signup-container {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  justify-content: center;
+  padding: 0 20px;
+  margin-top: 40px;
+}
+
+/* Form Container */
+.form-container {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 18px;
+  padding: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+input:required, select:required {
+  border-left: 3px solid #f87171; /* red border for required fields */
+}
+
+input:valid, select:valid {
+  border-left: 3px solid #4ade80; /* green border when valid */
+}
+
+/* Style the container when input is required/invalid */
+.phone-input-container:has(input:required) {
+  border-left: 3px solid #f87171;
+}
+
+/* Style the container when input is valid */
+.phone-input-container:has(input:valid) {
+  border-left: 3px solid #4ade80;
+}
+
+/* Remove default input borders if needed */
+.phone-input-container input {
+  border-left: none !important;
+}
+
+/* Form Row */
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  background-color: #f7f7f7;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+select:disabled {
+  background-color: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* Password Input Section */
+.password-input {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Password Requirements */
+.password-requirements {
+  margin-top: 0; /* Remove extra margin */
+  font-size: 13px;
+  text-align: center; /* Center text horizontally */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+}
+
+.password-requirements p {
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.password-requirements ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.password-requirements li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.3rem;
+}
+
+
+.password-requirements li::before {
+  content: "✗";
+  position: absolute;
+  left: 0;
+  color: #ff4444;
+}
+
+.password-requirements li.valid::before {
+  content: "✓";
+  color: #00C851;
+}
+
+.phone-input-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0 8px;
+}
+
+.phone-prefix {
+  padding: 8px 4px 8px 8px;
+  background: #f5f5f5;
+  color: #555;
+}
+
+#contact {
+  border: none;
+  padding: 8px;
+  flex-grow: 1;
+  outline: none;
+}
+
+/* Error Popup Styles */
+.error-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.error-popup.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 5px;
+  display: none;
+}
+
+.close-popup {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+}
+
+.close-popup:hover {
+  color: #333;
+}
+
+#popup-title {
+  color: #e53e3e;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+#popup-message {
+  color: #4a5568;
+  margin-bottom: 0;
+}
+
+/* Success state */
+.error-popup.show .popup-content.success #popup-title {
+  color: #38a169;
+}
+
+
+
+/* Button */
+.signup-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #fd697f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 25px;
+  transition: background-color 0.3s;
+}
+
+.signup-btn:hover {
+  background-color: #e55c70;
+}
+
+/* Login Link */
+.login-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.login-link a {
+  color: #fd697f;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* ===== RESPONSIVENESS ===== */
+@media (max-width: 900px) {
+  .signup-container {
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+}

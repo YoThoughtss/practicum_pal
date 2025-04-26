@@ -1,0 +1,240 @@
+/* Remove Horizontal Scroll */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+}
+
+/* navigation */
+.navbar {
+    display: flex;
+    align-items: center;
+    background: #FAF1F3;
+    padding: 10px 20px;
+    }
+
+    .logo{
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    white-space: nowrap;
+    }
+
+    .logo .practicum {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #F15377;
+    }
+
+    .nav-links {
+    list-style: none;
+    display: flex;
+    margin-left: auto;
+    }
+
+    .nav-links li {
+    margin-left: 30px;
+    }
+
+    .nav-links a {
+        font-family: 'Poppins', sans-serif; /* Matches the font-family in role.css */
+        font-size: 16px; /* Adjusted to match role.css */
+        font-weight: 600; /* Matches the boldness in role.css */
+        text-decoration: none;
+        color: #333; /* Matches the color in role.css */
+        cursor: pointer;
+        transition: color 0.3s ease-in-out;
+    }
+
+    .nav-links a:hover {
+        color: #da627d; /* Matches the hover color in role.css */
+    }
+/* navigation */
+
+
+
+/* section */
+.container{
+    margin: auto;
+    padding: 5px;
+}
+
+.main-heading{
+    width: 30%;
+    float: left;
+    font-family: 'Poppins';
+    color: #171A1F;
+}
+
+.main-heading h1{
+    margin-left: 15%;
+    margin-top: 15%; 
+    margin-bottom:auto;
+    padding: 5%; 
+    font-family: 'Poppins';
+    font-size: 60px;
+    line-height: 60px;
+    font-weight: 700;
+    color: #171A1F;
+}
+
+.main-heading h3{
+    margin-left: 15%;
+    padding: 5%;
+    font-family: 'Poppins';
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+    color: #171A1F;
+    width: 80%; 
+    word-wrap: break-word;  
+    word-break: break-word; 
+    display: inline-block; 
+}
+
+.buttonsignup{
+    margin-left: 20%;
+    margin-top: 3%;
+    padding: 10px 40px; /* Increase padding for a larger button */
+    font-family: 'Inter', sans-serif;
+    font-size: 16px; /* Increase font size */
+    line-height: 24px; /* Adjust line height */
+    font-weight: 400;
+    color: #FFFFFF;
+    background: #DA627D;
+    opacity: 1;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+
+/* Hover Effect */
+.main-heading .buttonsignup:hover {
+    background: #CF3355;
+}
+
+/* Pressed Effect */
+.main-heading .buttonsignup:hover:active {
+    background: #821E34;
+}
+
+/* Disabled */
+.main-heading.buttonsignup:disabled {
+    opacity: 0.4;
+}
+
+
+.main-image{
+    width: 70%; /* Adjust the width as needed */
+    height: auto;
+    float: left;
+}
+
+.main-images{
+    width: 70%;
+    float: right;
+}
+
+
+/* Responsive Design */
+
+/* Responsive Design for Mobile Devices (max-width: 500px) */
+@media (max-width: 500px) {
+
+    @media (max-width: 500px) {
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          background-color: #333;
+          position: absolute;
+          top: 60px;
+          right: 20px;
+          width: 150px;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+          padding: 10px 0;
+        }
+      
+        .nav-links.active {
+          display: flex;
+        }
+      
+        .nav-links li {
+          margin: 10px 0;
+          text-align: center;
+        }
+      
+        .menu-icon {
+          display: block;
+        }
+      }
+
+    /* Navigation Bar */
+    .rectangle {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+        align-items: flex-start;
+    }
+
+    .menu {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .menu-text {
+        font-size: 16px;
+    }
+
+    .mobile-menu-icon {
+        display: block;
+    }
+
+    /* Main Section */
+    .main-heading {
+        width: 100%;
+        float: none;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .main-heading h1 {
+        font-size: 32px;
+        line-height: 36px;
+        margin: 20px 0 10px 0;
+        padding: 0;
+    }
+
+    .main-heading h3 {
+        font-size: 14px;
+        line-height: 20px;
+        margin: 0 10px;
+        padding: 0;
+        width: 90%;
+    }
+
+    .buttonsignup {
+        margin: 20px auto;
+        display: block;
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .main-image,
+    .main-images {
+        width: 100%;
+        float: none;
+        margin-top: 20px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+}
+

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Practicum Pal - Role Selection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <link href="/assets/css/role.css" rel="stylesheet">
+  <link href="/assets/css/tailwind.css" rel="stylesheet">
+
+  <!-- favicons -->
+  <script>
+    fetch("/assets/favicons.html")
+      .then(res => res.text())
+      .then(html => {
+        document.head.insertAdjacentHTML("beforeend", html);
+      });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="left-panel">
+      <h1><span class="bold">Practicum</span> <span class="pink">Pal</span></h1>
+      <p class="subheading">OJT Assessment and<br>Monitoring System</p>
+      <p class="quote">"We're here to help you track, assess,<br>and succeed."</p>
+    </div>
+
+    <div class="card">
+      <img src="/assets/images/PracticumPal_logo.png" alt="Practicum Pal Logo" class="logo" />
+      <h2>Welcome Back!</h2>
+      <div class="button-container">
+        <button 
+          type="button" 
+          class="btn student-btn" 
+          aria-label="Login as Student"
+          onclick="window.location.href='student-login.html'">STUDENT
+        </button>
+        <button 
+          type="button" 
+          class="btn faculty-btn" 
+          aria-label="Login as Faculty"
+          onclick="window.location.href='faculty-login.html'">FACULTY
+        </button>      </div>
+      <p class="description">Please identify your role to get started<br>with your practicum experience.</p>
+    </div>
+  </div>
+</body>
+</html>

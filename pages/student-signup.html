@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Practicum Pal</title>
+  <link rel="stylesheet" href="styles/signup.css">
+  <link href="/assets/css/student-signup.css" rel="stylesheet">
+  <link href="/assets/css/tailwind.css" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- favicons-->
+  <script>
+    fetch("/assets/favicons.html")
+      .then(res => res.text())
+      .then(html => {
+        document.head.insertAdjacentHTML("beforeend", html);
+      });
+  </script>
+
+</head>
+<body>
+  <!-- Nav Header -->
+  <header class="nav-header">
+    <nav class="navbar">
+      <div class="logo">
+        <span class="practicum">Practicum</span>
+        <span class="pal">Pal</span>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/pages/login-role.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="signup-container">
+    <!-- Signup Form -->
+    <div class="form-container">
+      <h2>Create an Account</h2>
+      
+      <form id="signup-form">
+        <div class="form-row">
+          <div class="input-group">
+            <label for="student-id">Student ID</label>
+            <input type="text" id="student-id" placeholder="0000-0000" pattern="\d{4}-\d{4}" required>
+          </div>
+          <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="your.email@example.com" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="input-group">
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name" placeholder="Juan" pattern="[A-Za-z\s'-]+" required>
+          </div>
+          <div class="input-group">
+            <label for="last-name">Last Name</label>
+            <input type="text" id="last-name" placeholder="Dela Cruz" pattern="[A-Za-z\s'-]+" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="input-group">
+            <label for="gender">Gender</label>
+            <select id="gender" required>
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+            <span id="gender-error" class="error-message" style="color: red; display: none;">Please select a gender</span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="input-group">
+            <label for="program">Program</label>
+            <select id="program" required>
+              <option value="">Select Program</option>
+              <option value="ba-broadcasting">BA - Broadcasting</option>
+              <option value="bs-math">BS - Math</option>
+              <option value="bs-biology">BS - Biology</option>
+              <option value="bs-chemistry">BS - Chemistry</option>
+              <option value="bs-psychology">BS - Psychology</option>              
+            </select>
+          </div>
+
+          <!-- Block/Section Dropdown -->
+           <div class="input-group">
+            <label for="block-section">Block/Section</label>
+              <select id="block-section" required>
+               <option value="">Select Section</option>
+                 <option value="3A">3A</option>
+                 <option value="3B">3B</option>
+              </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="input-group">
+            <label for="contact">Contact Number</label>
+            <div class="phone-input-container">
+              <span class="phone-prefix">09</span>
+              <input type="tel" id="contact" placeholder="123456789" inputmode="numeric" maxlength="9" required>
+            </div>
+          </div>
+          <div class="input-group password-group">
+            <label for="password">Password</label>
+            <div class="password-flex">
+              <div class="password-input">
+                <input type="password" id="password" placeholder="Create password" required>
+                <button type="button" class="toggle-password">👁️</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="password-requirements">
+          <p>Password must contain:</p>
+          <ul>
+            <li class="req-length">Must consist of 8 characters</li>
+            <li class="req-upper">At least one uppercase letter</li>
+            <li class="req-lower">At least one lowercase letter</li>
+            <li class="req-number">At least one digit</li>
+            <li class="req-special">At least one special character</li>
+          </ul>
+        </div>
+
+        <button type="submit" class="signup-btn">Sign Up</button>
+      </form>
+
+      <p class="login-link">Already have an account? <a href="/pages/student-login.html">Log in</a></p>
+    </div>
+  </div>
+
+
+<!-- Error Popup Container -->
+  <div id="error-popup" class="error-popup" role="alertdialog" aria-labelledby="popup-title" aria-describedby="popup-message">
+    <div class="popup-content">
+        <span class="close-popup" aria-label="Close error message">&times;</span>
+        <h3 id="popup-title">Signup Error</h3>
+        <p id="popup-message"></p>
+    </div>
+  </div>
+
+
+  <script type="module" src="/backend/students/student_signup.js"></script>
+</body>
+</html>

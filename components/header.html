@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Header</title>
+
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="/assets/css/tailwind.css" rel="stylesheet">
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Favicons -->
+  <script>
+    fetch("/assets/favicons.html")
+      .then(res => res.text())
+      .then(html => {
+        document.head.insertAdjacentHTML("beforeend", html);
+      });
+  </script>
+</head>
+<body>
+  <header class="text-white flex items-center px-4 py-3 shadow-md" style="background-color: #DA627D;">
+    <div class="flex items-center space-x-4">
+      <h1 class="text-2xl font-semibold hidden md:block" id="app-title">Practicum Pal</h1>
+      <button id="toggleSidebar" class="focus:outline-none" aria-label="Toggle sidebar">
+        <span class="material-icons text-white text-3xl">menu</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Link to external JS -->
+  <script src="/components/header.js"></script>
+</body>
+</html>

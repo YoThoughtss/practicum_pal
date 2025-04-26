@@ -1,0 +1,133 @@
+<!-- Tailwind & Fonts -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+<!-- Sidebar Script -->
+<script src="/components/student_sidebar.js"></script>
+<link href="/assets/css/tailwind.css" rel="stylesheet">
+
+<!-- Favicons -->
+<script>
+  fetch("/assets/favicons.html")
+    .then(res => res.text())
+    .then(html => {
+      document.head.insertAdjacentHTML("beforeend", html);
+    });
+</script>
+
+<!-- Sidebar -->
+<div id="sidebar" class="w-64 h-screen fixed left-0 bg-white shadow-lg flex flex-col transition-all duration-300 overflow-hidden scrollbar-thin scrollbar-thumb-pink-300 scrollbar-track-gray-100" style="font-family: 'Poppins', sans-serif;">
+  
+<!-- Profile (Fixed Header) -->
+<!-- Update the profile section in student_sidebar.html -->
+<div class="flex items-center p-4 shrink-0">
+  <div class="w-16 h-16 rounded-full overflow-hidden relative">
+    <!-- Loading spinner (hidden by default) -->
+    <div id="profile-image-loader" class="absolute inset-0 flex items-center justify-center hidden">
+      <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-pink-500"></div>
+    </div>
+    
+    <!-- Profile image with loading state handler -->
+    <img 
+      id="sidebar-profile-image"
+      src="/assets/images/whitest_white.png" 
+      alt="default" 
+      class="w-full h-full object-cover"
+      onload="document.getElementById('profile-image-loader').classList.add('hidden')"
+    >
+  </div>
+  <div class="ml-4">
+    <h2 class="text-sm font-semibold text-gray-700 profile-name">Student Name</h2>
+    <p class="text-xs text-gray-500 mt-1 profile-program">PROGRAM</p>
+  </div>
+</div>
+
+  <div class="border-t border-gray-300 shrink-0 mx-4"></div>
+
+  <!-- Scrollable Nav -->
+  <div class="flex-1 overflow-y-auto px-4 mt-3 pb-24 scrollbar-default sm:scrollbar-fade">
+    <nav>
+      <p class="text-xs text-gray-400 uppercase mb-2">My Workspace</p>
+      <ul class="space-y-1 text-sm">
+      <li>
+        <a href="/users/students/dashboard.html"  class="flex items-center px-4 py-2 rounded-r-lg border-l-4 hover:border-pink-300 transition-colors duration-200"
+        data-auth-required="true">
+          <span class="material-icons-outlined mr-3 w-4 text-gray-500">dashboard</span>
+          <span class="menu-label">Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a href="/users/students/dtr.html"  class="flex items-center px-4 py-2 rounded-r-lg border-l-4 hover:border-pink-300 transition-colors duration-200"
+        data-auth-required="true">
+          <span class="material-icons-outlined mr-3 w-4 text-gray-500">access_time</span>
+          <span class="menu-label">Daily Time Record</span>
+        </a>
+      </li>
+      <li>
+        <a href="/users/students/ar.html"  class="flex items-center px-4 py-2 rounded-r-lg border-l-4 hover:border-pink-300 transition-colors duration-200"
+        data-auth-required="true">
+          <span class="material-icons-outlined mr-3 w-4 text-gray-500">assignment</span>
+          <span class="menu-label">Accomplishment Report</span>
+        </a>
+      </li>
+      <li>
+        <a href="/users/students/ojt-progress.html"  class="flex items-center px-4 py-2 rounded-r-lg border-l-4 hover:border-pink-300 transition-colors duration-200"
+        data-auth-required="true">
+          <span class="material-icons-outlined mr-3 w-4 text-gray-500">trending_up</span>
+          <span class="menu-label">OJT Progress</span>
+        </a>
+      </li>
+      <li>
+        <a href="/users/students/weekly-survey.html"  class="flex items-center px-4 py-2 rounded-r-lg border-l-4 hover:border-pink-300 transition-colors duration-200"
+        data-auth-required="true">
+          <span class="material-icons-outlined mr-3 w-4 text-gray-500">poll</span>
+          <span class="menu-label">Weekly Survey</span>
+        </a>
+      </li>
+      <li>
+        <a href="/users/students/archives.html"  class="flex items-center px-4 py-2 rounded-r-lg border-l-4 hover:border-pink-300 transition-colors duration-200"
+        data-auth-required="true">
+          <span class="material-icons-outlined mr-3 w-4 text-gray-500">archive</span>
+          <span class="menu-label">Archives</span>
+        </a>
+      </li>
+      <li>
+        <a href="/users/students/requirements.html" class="flex items-center px-4 py-2 rounded-r-lg border-l-4 hover:border-pink-300">
+          <span class="material-icons-outlined mr-3 w-4 text-gray-500">description</span>
+          <span class="menu-label">Requirements</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="mt-6 border-t pt-4">
+      <p class="text-xs text-gray-400 uppercase mb-2 pl-4">Personal</p>
+      <ul class="space-y-1 text-sm">
+        <li>
+          <a href="/users/students/personal/profile.html" class="flex items-center px-4 py-2 rounded-r-lg border-l-4 hover:border-pink-300">
+            <span class="material-icons-outlined mr-3 w-4 text-gray-500">person</span>
+            <span class="menu-label">Profile</span>
+          </a>
+        </li>
+        <li>
+          <a href="/users/students/personal/settings.html" class="flex items-center px-4 py-2 rounded-r-lg border-l-4 hover:border-pink-300">
+            <span class="material-icons-outlined mr-3 w-4 text-gray-500">settings</span>
+            <span class="menu-label">Settings</span>
+          </a>
+        </li>
+        <li>
+          <a href="/users/students/personal/about.html" class="flex items-center px-4 py-2 rounded-r-lg border-l-4 hover:border-pink-300">
+            <span class="material-icons-outlined mr-3 w-4 text-gray-500">info</span>
+            <span class="menu-label">About</span>
+          </a>
+        </li>
+        <li>
+          <a href="/components/logout.html" class="flex items-center px-4 py-2 rounded-r-lg border-l-4 hover:border-pink-300">
+            <span class="material-icons-outlined mr-3 w-4 text-gray-500">logout</span>
+            <span class="menu-label">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>

@@ -1,0 +1,198 @@
+/* Reuse your navbar styles */
+@import url('./style.css');
+
+* {
+    box-sizing:border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Poppins';
+    background-color: #eaecef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+  }
+  
+  .container {
+    display: flex;
+    gap: 50px;
+    max-width: 900px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .left-panel {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    height: 100%;
+    
+  }
+  
+  
+  .left-panel h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+  }
+  
+  .left-panel .bold {
+    font-weight: 700;
+    color: #2c2c2c;
+  }
+  
+  .left-panel .pink {
+    color:  #da627d;
+    font-weight: 700;
+  }
+  
+  .subheading {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .quote {
+    font-size: 16px;
+    font-style: italic;
+    color: #777;
+  }
+  
+  .card {
+    flex: 1;
+    min-width: 280px;
+    background-color: #fff;
+    margin-left: 20px;
+    padding: 60px 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding-top: 25px; /* Reduce if already defined */
+}
+
+.logo {
+    display: block; /* Center the logo */
+    margin: 0 auto 10px; /* Reduce spacing below the logo */
+    width: 170px; /* Adjust the size of the logo */
+    height: auto; /* Maintain aspect ratio */
+}
+  
+  .card h2 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-top: 0; /* Remove extra spacing above the heading */
+    margin-bottom: 60px;
+    color: #111;
+  }
+  
+  .btn {
+    width: 40%;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 300;
+    border: none;
+    margin-bottom: 15px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+
+  .button-container {
+    display: flex; /* Use flexbox for alignment */
+    justify-content: center; /* Center the buttons horizontally */
+    gap: 20px; /* Add equal spacing between the buttons */
+    margin-top: 20px; /* Optional: Add spacing above the buttons */
+}
+  
+  
+  .student-btn {
+    background-color: #da627d;
+    color: #fff;
+  }
+  
+  .student-btn:hover {
+    background-color: #b82d4f;
+  }
+  
+  .faculty-btn {
+    background-color: #197dca;
+    color: #fff;
+  }
+  
+  .faculty-btn:hover {
+    background-color: #155fc0;
+  }
+  
+  .description {
+    font-size: 13px;
+    font-style: italic;
+    color: #555;
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 760px) {
+    .container {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .left-panel {
+      order: 1;
+      margin-top: 20px;
+    }
+  
+    .card {
+      order: 2;
+    }
+  }
+
+  .navbar {
+    position: fixed; /* Fixes the navbar at the top */
+    top: 0;
+    left: 0; /* Ensures the navbar starts from the left edge */
+    width: 100%; /* Makes the navbar span the full width */
+    background: #FAF1F3; /* Matches the background color in style.css */
+    z-index: 1000; /* Ensures the navbar stays above other elements */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for better visibility */
+    padding: 10px 20px; /* Add padding for spacing */
+    display: flex; /* Use flexbox for alignment */
+    justify-content: space-between; /* Space between logo and nav links */
+    align-items: center; /* Vertically center the content */
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-left: auto; /* Pushes the nav links to the right */
+}
+
+.nav-links li {
+    margin-left: 30px; /* Matches the spacing in style.css */
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif; /* Matches the font-family in style.css */
+    font-size: 16px; /* Matches the font size in style.css */
+    cursor: pointer;
+    transition: color 0.3s ease-in-out; /* Matches the hover transition in style.css */
+}
+
+.nav-links a.active {
+    color: #da627d; /* Highlight the active link */
+}
+
+.nav-links a:hover {
+    color: #da627d; /* Matches the hover color in style.css */
+}

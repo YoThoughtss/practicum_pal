@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Practicum Pal</title>
+
+  <!-- Tailwind CSS & Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Check If There Are Currently Logged In-->
+    <script type="module" src="../../backend/authGuardStudent.js"></script>
+
+  <!-- Inject Components -->
+  <script src="/components/injectLayoutStudent.js"></script>
+
+  <style>
+    .title-card {
+      background-color: #DA627D;
+      color: white;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    .profile-card {
+      background: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .setting-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      border: 1px solid #d6d6d6;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+    .setting-item:hover {
+      background-color: #e9e9e9;
+    }
+    .setting-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: #4B5563;
+    }
+    .material-icons {
+      font-size: 24px;
+      color: #6B7280;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gray-100 font-[Poppins]">
+
+  <!-- Header -->
+  <div id="header-container" class="sticky top-0 z-10 bg-white shadow"></div>
+
+  <div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <div id="sidebar-container" class="w-64"></div>
+
+    <!-- Content + Rightbar -->
+    <div class="flex flex-1 p-6 gap-6 items-start">
+      
+      <!-- Main Content -->
+      <div class="flex flex-col flex-1 gap-6">
+        <!-- Title Card -->
+        <div class="title-card">
+          <h1 class="text-2xl font-bold">Settings</h1>
+        </div>
+
+        <!-- Combined Card -->
+        <div class="profile-card bg-white shadow-md rounded-md p-6 -mt-7">
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">Edit Information</h2>
+          <div class="setting-item" id="openEditNameModal">  <!-- Added ID here -->
+            <div class="setting-left">
+              <span class="material-icons-outlined text-xl text-gray-600">edit</span>
+              <span>Edit Name</span>
+            </div>
+            <span class="material-icons-outlined text-gray-400">chevron_right</span>
+          </div>
+          <div class="setting-item" id="openChangeEmailModal">  <!-- Added ID here -->
+            <div class="setting-left">
+              <span class="material-icons-outlined text-xl text-gray-600">email</span>
+              <span>Change Email</span>
+            </div>
+            <span class="material-icons-outlined text-gray-400">chevron_right</span>
+          </div>
+          <div class="setting-item" id="openChangePhoneNumberModal">  <!-- Added ID here -->
+            <div class="setting-left">
+              <span class="material-icons-outlined text-xl text-gray-600">phone</span>
+              <span>Change Phone Number</span>
+            </div>
+            <span class="material-icons-outlined text-gray-400">chevron_right</span>
+          </div>
+
+          <h2 class="text-xl font-semibold text-gray-800 mt-8 mb-4">OJT Information</h2>
+          <div class="setting-item">
+            <div class="setting-left">
+              <span class="material-icons-outlined text-xl text-gray-600">business</span>
+              <span>Set Company</span>
+            </div>
+            <span class="material-icons-outlined text-gray-400">chevron_right</span>
+          </div>
+          <div class="setting-item">
+            <div class="setting-left">
+              <span class="material-icons-outlined text-xl text-gray-600">location_on</span>
+              <span>Edit Address</span>
+            </div>
+            <span class="material-icons-outlined text-gray-400">chevron_right</span>
+          </div>
+
+          <h2 class="text-xl font-semibold text-gray-800 mt-8 mb-4">Security</h2>
+          <div class="setting-item">
+            <div class="setting-left">
+              <span class="material-icons-outlined text-xl text-gray-600">vpn_key</span>
+              <span>Change Password</span>
+            </div>
+            <span class="material-icons-outlined text-gray-400">chevron_right</span>
+          </div>
+          <div class="setting-item">
+            <div class="setting-left">
+              <span class="material-icons-outlined text-xl text-gray-600">lock</span>
+              <span>Forgot Password</span>
+            </div>
+            <span class="material-icons-outlined text-gray-400">chevron_right</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rightbar -->
+      <aside id="rightbar-container" class="hidden md:block w-[20%] self-start">
+        <script src="../../../components/rightbar.js"></script>
+      </aside>
+
+      <!-- Modal Container -->
+<div id="modals-container"></div>
+<script src="/backend/students/personal/edit_name/editNameInjector.js"></script>
+<script src="/backend/students/personal/change_email/changeEmailInjector.js"></script>
+<script src="/backend/students/personal/change_phone/changePhoneNumberInjector.js"></script>
+
+
+    </div>
+  </div>
+  
+
+</body>
+</html>

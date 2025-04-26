@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Practicum Pal</title>
+  
+  <!-- Tailwind CSS & Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Check If There Are Currently Logged In-->
+  <script type="module" src="../../../backend/authGuardStudent.js"></script>
+
+  <!-- Inject Components -->
+  <script src="/components/injectLayoutStudent.js"></script>
+
+  <script type="module" src="/backend/students/personal/profile.js"></script>
+  
+  <style>
+    .practicum-card {
+      background-color: #DA627D;
+      font-family: 'Poppins', sans-serif;
+    }
+    .profile-card {
+      background: rgb(255, 255, 255);
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .profile-item {
+      margin-bottom: 0.75rem;
+      display: flex;
+      padding-left: 2rem;
+    }
+    .profile-label {
+      font-weight: 500;
+      color: #4B5563;
+      width: 150px;
+      flex-shrink: 0;
+    }
+    .profile-value {
+      color: #111827;
+    }
+    .title-card {
+      background-color: #DA627D;
+      color: white;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.50rem;
+    }
+    .profile-pic-card {
+      display: flex;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    #rightbar-container {
+      top: 3rem;
+      height: calc(100vh - 6rem);
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gray-100 font-[Poppins]">
+
+  <!-- Header -->
+  <div id="header-container" class="sticky top-0 z-10 bg-white shadow"></div>
+
+  <div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <div id="sidebar-container" class="w-64"></div>
+  
+    <!-- Main Content Area -->
+    <div class="flex flex-1">
+      <!-- Profile Content -->
+      <div class="flex-1 pr-0 pl-6 py-6">
+        <!-- Title Card -->
+        <div class="title-card">
+          <h1 class="text-2xl font-bold">My Profile</h1>
+        </div>
+        
+        <!-- Editable Profile Picture Card -->
+        <div class="profile-card profile-pic-card -mt-1" style="--profile-size: 10rem">
+          <div class="relative mx-auto cursor-pointer" 
+               id="profile-picture-container"
+               style="width: var(--profile-size); height: var(--profile-size)">
+            <!-- Image Container -->
+            <div class="w-full h-full rounded-full overflow-hidden border-4 border-[#DA627D] group">
+              <img 
+                src="/assets/images/ic_user_profile_DA627D.png" 
+                alt="Profile Picture" 
+                class="w-full h-full object-cover transition-opacity group-hover:opacity-80"
+                id="profile-image"
+              >
+              <!-- Edit Icon Overlay -->
+              <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black bg-opacity-30 rounded-full">
+                <span class="material-icons text-white" style="font-size: calc(var(--profile-size) * 0.15)">edit</span>
+              </div>
+            </div>
+            <!-- Text Hint -->
+            <p class="text-center text-xs text-gray-500 mt-2">Click to upload photo</p>
+          </div>
+        </div>
+
+        <!-- Personal Details Card -->
+        <div class="profile-card bg-white shadow-md rounded-md p-6 -mt-1">
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">Personal Details</h2>
+          <div class="profile-item border-b border-gray-300 py-2">
+            <span class="profile-label">Student ID:</span>
+            <span class="profile-value" id="student-id">[0000-0000]</span>
+          </div>
+          <div class="profile-item border-b border-gray-300 py-2">
+            <span class="profile-label">Name:</span>
+            <span class="profile-value" id="student-name">[Full Name Here]</span>
+          </div>
+          <div class="profile-item border-b border-gray-300 py-2">
+            <span class="profile-label">Gender:</span>
+            <span class="profile-value" id="student-gender">[Male/Female]</span>
+          </div>
+          <div class="profile-item border-b border-gray-300 py-2">
+            <span class="profile-label">Program:</span>
+            <span class="profile-value" id="student-program">[BS-Biology]</span>
+          </div>
+          <div class="profile-item border-b border-gray-300 py-2">
+            <span class="profile-label">Block/Section:</span>
+            <span class="profile-value" id="student-block">[3A]</span>
+          </div>
+        </div>
+
+        <!-- OJT Company Information Card (now placed above Contact Details) -->
+        <div class="profile-card bg-white shadow-md rounded-md p-6 -mt-1">
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">OJT Company Information</h2>
+          <div class="profile-item border-b border-gray-300 py-2">
+            <span class="profile-label">Company Name:</span>
+            <span class="profile-value" id="company-name">[Company Name Here]</span>
+          </div>
+          <div class="profile-item border-b border-gray-300 py-2">
+            <span class="profile-label">Address:</span>
+            <span class="profile-value" id="company-address">[Company Address Here]</span>
+          </div>
+        </div>
+
+        <!-- Contact Details Card (now placed below OJT Company Information) -->
+        <div class="profile-card bg-white shadow-md rounded-md p-6 -mt-1">
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">Contact Details</h2>
+          <div class="profile-item border-b border-gray-300 py-2">
+            <span class="profile-label">Email:</span>
+            <span class="profile-value" id="student-email">[Email Address Here]</span>
+          </div>
+          <div class="profile-item border-b border-gray-300 py-2">
+            <span class="profile-label">Contact Number:</span>
+            <span class="profile-value" id="student-contact">[Contact Number Here]</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Rightbar -->
+      <aside id="rightbar-container" class="hidden md:block p-6" style="width: 290px;">
+        <script src="../../../components/rightbar.js"></script>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

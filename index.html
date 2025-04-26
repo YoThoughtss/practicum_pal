@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Practicum Pal</title>
+
+  <!-- Google Fonts Import -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <link href="/assets/css/tailwind.css" rel="stylesheet">
+  <link href="/assets/css/index.css" rel="stylesheet">
+
+
+  <!-- favicons-->
+  <script>
+    fetch("/assets/favicons.html")
+      .then(res => res.text())
+      .then(html => {
+        document.head.insertAdjacentHTML("beforeend", html);
+      });
+  </script>
+
+
+</head>
+<body class="font-poppins bg-white overflow-x-hidden">
+  <!-- Navigation -->
+  <nav class="navbar flex items-center bg-[#FAF1F3] h-19 px-5">
+    <div class="container mx-auto flex items-center">
+      <div class="logo text-[20px] font-semibold whitespace-nowrap">
+        <span class="practicum text-[#F15377]">Practicum</span>
+        <span class="pal text-gray-800">Pal</span>
+      </div>
+      <ul class="nav-links flex ml-auto space-x-8 text-lg">
+        <li><a href="index.html" class="font-poppins hover:text-[#da627d] transition-colors">Home</a></li>
+        <li><a href="/pages/about.html" class="font-normal hover:text-[#da627d] transition-colors">About Us</a></li>
+        <li><a href="/pages/contact.html" class="font-normal hover:text-[#da627d] transition-colors">Contact Us</a></li>
+        <li><a href="/pages/login-role.html" class="font-normal hover:text-[#da627d] transition-colors">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Section -->
+  <section class="py-20">
+    <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-4">
+      <!-- Main Heading -->
+      <div class="main-heading md:w-1/3 text-left">
+        <h1 class="text-[60px] leading-[60px] font-bold text-[#171A1F] mb-4">
+          Track Your Journey, Achieve Your Goals!
+        </h1>
+        <h3 class="text-[14px] leading-[22px] font-normal text-[#171A1F] mb-6">
+          Stay on course, stay motivated, and reach new milestones—one step at a time.
+        </h3>
+        <a href="/pages/login-role.html">
+          <button class="buttonsignup bg-[#DA627D] text-white py-2 px-8 rounded-lg hover:bg-[#CF3355] active:bg-[#821E34] transition-all">
+            Get Started
+          </button>
+        </a>
+      </div>
+      
+      <!-- Main Image -->
+      <div class="main-image md:w-2/3 mt-10 md:mt-0">
+        <img class="w-full rounded-lg shadow-lg" src="assets/images/LandPage.jpg" alt="Landing Page" />
+      </div>
+    </div>
+  </section>
+</body>
+</html>

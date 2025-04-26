@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Company Address</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="/assets/css/tailwind.css" rel="stylesheet">
+  
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .btn-family {
+      background-color: #DA627D;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-family:hover {
+      background-color: #A94C61;
+    }
+
+    .user-icon {
+      background-color: #f3f4f6;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6B7280;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Modal Structure -->
+  <div id="editAddressModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+    <div class="bg-gray-50 rounded-lg w-full max-w-xs p-6 relative mt-10">
+      <!-- Close Button -->
+      <button id="closeEditAddressModal" class="absolute top-2 right-2 text-gray-600 hover:text-gray-900">
+        <span class="material-icons-outlined">close</span>
+      </button>
+
+      <!-- Modal Header -->
+      <div class="text-center mb-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Edit Company Address</h2>
+      </div>
+
+      <!-- Current Address Display -->
+      <div class="mb-6">
+        <p class="text-sm font-medium text-gray-700 mb-2">Current Address</p>
+        <div class="flex items-center gap-3 p-0.5 w-[255px] bg-gray-100 border rounded-lg">
+          <div class="user-icon w-10 h-10">
+            <span class="material-icons-outlined text-2xl">location_on</span>
+          </div>
+          <span class="font-medium text-gray-800" id="currentAddressDisplay">
+            123 Business Rd, Tech Park, Manila 1000
+          </span>
+        </div>
+      </div>
+
+      <!-- Edit Form -->
+      <form id="editAddressForm" class="space-y-4">
+        <div>
+          <label for="streetAddress" class="block text-sm font-medium text-gray-700 mb-1">Street Address</label>
+          <input type="text" id="streetAddress" name="streetAddress" 
+                 placeholder="Enter street address"
+                 class="w-full p-3 border border-gray-400 rounded-lg"
+                 value="">
+        </div>
+
+        <div>
+          <label for="city" class="block text-sm font-medium text-gray-700 mb-1">City</label>
+          <input type="text" id="city" name="city" 
+                 placeholder="Enter city"
+                 class="w-full p-3 border border-gray-400 rounded-lg"
+                 value="">
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label for="state" class="block text-sm font-medium text-gray-700 mb-1">State/Province</label>
+            <input type="text" id="state" name="state" 
+                   placeholder="State"
+                   class="w-full p-3 border border-gray-400 rounded-lg"
+                   value="">
+          </div>
+          <div>
+            <label for="zipCode" class="block text-sm font-medium text-gray-700 mb-1">ZIP Code</label>
+            <input type="text" id="zipCode" name="zipCode" 
+                   placeholder="ZIP"
+                   class="w-full p-3 border border-gray-400 rounded-lg"
+                   value="">
+          </div>
+        </div>
+
+        <!-- Password Field with Toggle -->
+        <div class="relative">
+          <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+          <div class="relative">
+            <input type="password" id="password" name="password" 
+                   class="w-full p-3 pr-10 border border-gray-400 rounded-lg"
+                   placeholder="Enter your password">
+            <button type="button" class="absolute right-3 top-7 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    onclick="togglePasswordVisibility('password', this)">
+              <span class="material-icons-outlined">visibility_off</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Centered Save Button -->
+        <div class="flex justify-center pt-4">
+          <button type="submit" 
+                  class="w-72 px-12 py-1.5 rounded-lg font-medium btn-family">
+            Update Address
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function togglePasswordVisibility(inputId, button) {
+      const input = document.getElementById(inputId);
+      const icon = button.querySelector('.material-icons-outlined');
+      
+      if (input.type === "password") {
+        input.type = "text";
+        icon.textContent = "visibility";
+      } else {
+        input.type = "password";
+        icon.textContent = "visibility_off";
+      }
+    }
+  </script>
+
+</body>
+</html>

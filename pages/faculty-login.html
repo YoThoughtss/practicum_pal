@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Login - Practicum Pal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="/assets/css/faculty-login.css" rel="stylesheet">
+    <link href="/assets/css/tailwind.css" rel="stylesheet">
+
+
+  <!-- favicons-->
+  <script>
+    fetch("/assets/favicons.html")
+      .then(res => res.text())
+      .then(html => {
+        document.head.insertAdjacentHTML("beforeend", html);
+      });
+  </script>
+
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="logo">
+            <span class="practicum">Practicum</span>
+            <span class="pal">Pal</span>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/pages/about.html">About Us</a></li>
+            <li><a href="/pages/contact.html">Contact Us</a></li>
+            <li><a href="/pages/login-role.html">Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-container">
+        <!-- Logo and Title -->
+        <div class="welcome-header">
+            <img src="/assets/images/PracticumPal_logo.png" alt="Practicum Pal Logo" class="welcome-logo">
+            <h2>
+                Welcome to<br>
+                Practicum <span class="pal">Pal</span>
+            </h2>
+        </div>
+
+        <!-- Login Container -->
+        <div class="login-container">
+            <div class="login-header">
+                <h1>FACULTY</h1>
+            </div>
+            
+            <form class="login-form">
+                <div class="input-group">
+                    <label for="faculty-id">FACULTY ID</label>
+                    <input type="text" id="faculty-id" placeholder="Ex. 1122-3344">
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" placeholder="Enter your password">
+                        <span class="toggle-password">👁️</span>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" class="login-btn">Log in</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.querySelector(".login-form").addEventListener("submit", function(e) {
+            e.preventDefault(); // Prevent form from submitting immediately
+    
+            const facultyIdInput = document.getElementById("faculty-id");
+            const facultyId = facultyIdInput.value.trim();
+            const idPattern = /^\d{4}-\d{4}$/;
+    
+            if (!idPattern.test(facultyId)) {
+                alert("Please enter a valid Faculty ID in the format 0000-0000.");
+                facultyIdInput.focus();
+                return;
+            }
+    
+            // Proceed with actual login logic here (e.g., Firebase Authentication, fetch, etc.)
+            console.log("Logging in with Faculty ID:", facultyId);
+            // You can replace this console.log with your real login handling
+        });
+    
+        // Optional: toggle password visibility
+        document.querySelector(".toggle-password").addEventListener("click", function () {
+            const passwordField = document.getElementById("password");
+            const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
+            passwordField.setAttribute("type", type);
+        });
+    </script>
+    
+</body>
+
+</html>

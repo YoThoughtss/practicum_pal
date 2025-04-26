@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Name Modal</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="/assets/css/tailwind.css" rel="stylesheet">
+
+
+  
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Google Fonts: Poppins -->
+ <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  
+  <style>
+    body {
+    font-family: 'Poppins', sans-serif;
+    }
+
+    /* Visual feedback for active field */
+#firstName:focus, #lastName:focus {
+  border-color: #DA627D !important;
+  box-shadow: 0 0 0 2px rgba(218, 98, 125, 0.2);
+}
+
+.error-message {
+  transition: all 0.2s ease;
+}
+
+input.border-red-500 {
+  border-color: #ef4444 !important;
+}
+
+/* Spinner animation */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Toast animations */
+.transform {
+  transition-property: transform, opacity;
+}
+.translate-y-4 {
+  transform: translateY(1rem);
+}
+.translate-y-0 {
+  transform: translateY(0);
+}
+.opacity-0 {
+  opacity: 0;
+}
+.opacity-100 {
+  opacity: 1;
+}
+    .btn-family {
+    background-color: #DA627D;
+    color: white;
+    transition: background-color 0.3s ease;
+   }
+
+  .btn-family:hover {
+    background-color: #A94C61; /* darker tone from your palette */
+   }
+    
+    .user-icon {
+      background-color: #f3f4f6;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6B7280;
+    }
+
+    
+    #error-modal {
+    transition: opacity 0.3s ease;
+    }
+    #error-modal.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #error-modal > div {
+      transform: translateY(0);
+      transition: transform 0.3s ease;
+    }
+    #error-modal.hidden > div {
+      transform: translateY(-20px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Modal Structure -->
+  <div id="editNameModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+    <div class="bg-gray-50 rounded-lg w-full max-w-xs p-6 relative mt-10">
+      <!-- Close Button -->
+      <button id="closeEditNameModal" class="absolute top-2 right-2 text-gray-600 hover:text-gray-900">
+        <span class="material-icons-outlined">close</span>
+      </button>
+
+      <!-- Modal Header -->
+      <div class="text-center mb-6">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Edit Name</h2>
+      </div>
+
+<!-- Current Name Display -->
+<div class="mb-6 ml-2">
+  <p class="text-md font-medium text-gray-700 mb-3">Current Name</p>
+  <div class="flex items-center gap-0.5 p-0.5 w-[255px] bg-gray-100 border rounded-lg">
+    <div class="user-icon w-10 h-10">
+      <span class="material-icons-outlined text-2xl">person</span>
+    </div>
+    <span class="font-medium text-gray-800" id="currentNameDisplay">Juan Dela Cruz</span>
+  </div>
+</div>
+
+
+
+      <!-- Edit Form -->
+      <form id="editNameForm" class="space-y-4">
+        <div>
+          <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+          <input type="text" id="firstName" name="firstName" 
+                 class="w-full p-3 border border-gray-400 rounded-lg"
+                 placeholder="Enter your new first name">
+        </div>
+
+        <div>
+          <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+          <input type="text" id="lastName" name="lastName" 
+          class="w-full p-3 border border-gray-400 rounded-lg"
+          placeholder="Enter your new last name">  
+        </div>
+
+        <!-- Centered Save Button -->
+        <div class="flex justify-center pt-4">
+          <button type="submit" 
+          class="w-72 px-12 py-1.5 rounded-lg font-medium btn-family">
+          Update
+      </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+        <!-- Error/Success Modal -->
+        <div id="error-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+          <div class="bg-white rounded-lg p-6 max-w-md w-full">
+            <div class="flex justify-between items-center mb-4">
+              <h3 id="modal-title" class="text-xl font-bold"></h3>
+              <button id="close-modal" class="text-gray-500 hover:text-gray-700">
+                <span class="material-icons">close</span>
+              </button>
+            </div>
+            <p id="modal-message" class="mb-4"></p>
+            <div class="flex justify-end">
+              <button id="confirm-action" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
+      
+  
+
+</body>
+</html>

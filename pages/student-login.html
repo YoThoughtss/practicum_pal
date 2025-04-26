@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login - Practicum Pal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="/assets/css/student-login.css" rel="stylesheet">
+    <link href="/assets/css/tailwind.css" rel="stylesheet">
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+
+    <!-- firebase config -->
+    <script src="/backend/firebase.js" type="module"></script>
+
+    <!-- student auth -->
+    <script src="/backend/students/studentAuth.js" type="module"></script>
+  
+
+  <!-- favicons-->
+  <script>
+    fetch("/assets/favicons.html")
+      .then(res => res.text())
+      .then(html => {
+        document.head.insertAdjacentHTML("beforeend", html);
+      });
+  </script>
+
+  <style>
+    /* Error Popup Styles */
+    .error-popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+    
+    .error-popup.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .popup-content {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+    
+    .close-popup {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #666;
+    }
+    
+    .close-popup:hover {
+      color: #333;
+    }
+    
+    #popup-title {
+      color: #e53e3e;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    
+    #popup-message {
+      color: #4a5568;
+      margin-bottom: 0;
+    }
+    
+    .resend-verification {
+      color: #3182ce;
+      text-decoration: underline;
+      cursor: pointer;
+      margin-top: 1rem;
+      display: inline-block;
+    }
+    
+    .resend-verification:hover {
+      color: #2c5282;
+    }
+  </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="logo">
+            <span class="practicum">Practicum</span>
+            <span class="pal">Pal</span>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/pages/about.html">About Us</a></li>
+            <li><a href="/pages/contact.html">Contact Us</a></li>
+            <li><a href="/pages/login-role.html">Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-container">
+        <!-- Logo and Title -->
+        <div class="welcome-header">
+            <img src="/assets/images/PracticumPal_logo.png" alt="Practicum Pal Logo" class="welcome-logo">
+            <h2>
+                Welcome to<br>
+                Practicum <span class="pal">Pal</span>
+            </h2>
+        </div>
+
+        <!-- Login Container -->
+        <div class="login-container">
+            <div class="login-header">
+                <h1>STUDENT</h1>
+            </div>
+            
+            <form id="studentLoginForm" class="login-form">
+                <div class="input-group">
+                    <label for="student-id">Student ID</label>
+                    <input type="text" id="student-id" placeholder="Ex. 1122-3344">
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" placeholder="Enter your password">
+                        <span class="toggle-password">👁️</span>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" class="login-btn">Log in</button>
+                
+                <div class="login-links">
+                    <p>Don't have an account? <a href="student-signup.html">Sign up</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Error Popup Container - Single instance now -->
+    <div id="error-popup" class="error-popup" role="alertdialog" aria-labelledby="popup-title" aria-describedby="popup-message">
+        <div class="popup-content">
+          <span class="close-popup" aria-label="Close error message">&times;</span>
+          <h3 id="popup-title">Login Error</h3>
+          <p id="popup-message"></p>
+          <div id="verification-actions" style="display: none;">
+            <p class="resend-verification" id="resend-verification">Resend verification email</p>
+          </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            localStorage.clear();
+            // Get popup elements
+            const errorPopup = document.getElementById('error-popup');
+            const popupMessage = document.getElementById('popup-message');
+            const popupTitle = document.getElementById('popup-title');
+            const closePopup = document.querySelector('.close-popup');
+            const verificationActions = document.getElementById('verification-actions');
+            const resendVerification = document.getElementById('resend-verification');
+
+            // Store email for potential resend
+            let currentEmail = null;
+
+            // Restrict student ID input
+            const studentIdInput = document.getElementById('student-id');
+            studentIdInput.addEventListener('input', () => {
+                studentIdInput.value = studentIdInput.value.replace(/[^0-9-]/g, '');
+            });
+
+            // Browser compatibility check
+            const { checkBrowserCompatibility } = await import('/backend/browserCheck.js');
+            const issues = checkBrowserCompatibility();
+        
+            if (issues.length > 0) {
+                const warning = document.createElement('div');
+                warning.className = 'browser-warning';
+                warning.innerHTML = `
+                <strong>Browser Compatibility Notice:</strong>
+                <ul>
+                    ${issues.map(issue => `<li>${issue}</li>`).join('')}
+                </ul>
+                <p>Some features may not work properly. Consider updating your browser or adjusting settings.</p>
+                `;
+                document.body.prepend(warning);
+            }
+        
+            const loginForm = document.getElementById('studentLoginForm');
+            const loginBtn = loginForm.querySelector('.login-btn');
+            
+            // Toggle password visibility
+            const togglePassword = document.querySelector('.toggle-password');
+            const passwordInput = document.getElementById('password');
+            
+            togglePassword.addEventListener('click', () => {
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    togglePassword.textContent = '👁️';
+                } else {
+                    passwordInput.type = 'password';
+                    togglePassword.textContent = '👁️';
+                }
+            });
+            
+            // Close popup handlers
+            closePopup.addEventListener('click', () => {
+                errorPopup.classList.remove('show');
+                verificationActions.style.display = 'none';
+            });
+            
+            errorPopup.addEventListener('click', (e) => {
+                if (e.target === errorPopup) {
+                    errorPopup.classList.remove('show');
+                    verificationActions.style.display = 'none';
+                }
+            });
+            
+            // Handle resend verification email
+            resendVerification.addEventListener('click', async () => {
+                try {
+                    const { sendEmailVerification } = await import('/backend/students/studentAuth.js');
+                    await sendEmailVerification();
+                    popupMessage.textContent = 'Verification email resent. Please check your inbox.';
+                    verificationActions.style.display = 'none';
+                } catch (error) {
+                    popupMessage.textContent = 'Failed to resend verification email: ' + error.message;
+                }
+            });
+            
+            // Handle form submission
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                loginBtn.disabled = true;
+                loginBtn.textContent = 'Logging in...';
+                
+                const studentId = document.getElementById('student-id').value.trim();
+                const password = document.getElementById('password').value;
+                
+                try {
+                    const { studentLogin, storeAuthLocally } = await import('/backend/students/studentAuth.js');
+                    const result = await studentLogin(studentId, password);
+                    
+                    // Check if email is verified
+                    if (!result.firebaseUser.emailVerified) {
+                        currentEmail = result.firebaseUser.email;
+                        popupTitle.textContent = 'Email Not Verified';
+                        popupMessage.textContent = 'Please verify your email address before logging in. Check your inbox for the verification email.';
+                        verificationActions.style.display = 'block';
+                        errorPopup.classList.add('show');
+                        return;
+                    }
+                    
+                    
+                    // Store user data locally as fallback
+                    storeAuthLocally({
+                        uid: result.firebaseUser.uid,
+                        email: result.firebaseUser.email,
+                        studentId: studentId,
+                        firstName: result.studentData.firstName,
+                        lastName: result.studentData.lastName,
+                        program: result.studentData.program
+                    });
+                    
+                    // Redirect to appropriate page based on requirements status
+                    const requirementsComplete = typeof result.studentData.isAuthorized === 'undefined' || !result.studentData.isAuthorized;
+                    
+                    if (requirementsComplete) {
+                        window.location.href = '/users/students/dashboard.html';
+                    } else {
+                        window.location.href = '/users/students/requirements.html';
+                    }
+
+                } catch (error) {
+                    // Show error in popup
+                    let errorText = error.message;
+                    
+                    // Common error messages
+                    if (error.code) {
+                        switch(error.code) {
+                            case 'auth/invalid-email':
+                                errorText = "Please enter a valid student ID";
+                                break;
+                            case 'auth/user-not-found':
+                                errorText = "Student account not found";
+                                break;
+                            case 'auth/wrong-password':
+                                errorText = "Incorrect password";
+                                break;
+                            case 'auth/too-many-requests':
+                                errorText = "Too many attempts. Please try again later.";
+                                break;
+                        }
+                    }
+                    
+                    if (error.code === 'auth/web-storage-unsupported' || 
+                        error.message.includes('cookies')) {
+                        errorText = "Your browser settings may be blocking login. " +
+                            "Please check your cookie settings or try another browser.";
+                    }
+                    
+                    popupTitle.textContent = 'Login Error';
+                    popupMessage.textContent = errorText;
+                    verificationActions.style.display = 'none';
+                    errorPopup.classList.add('show');
+                    
+                    // Auto-hide after 5 seconds
+                    setTimeout(() => {
+                        errorPopup.classList.remove('show');
+                    }, 5000);
+                } finally {
+                    loginBtn.disabled = false;
+                    loginBtn.textContent = 'Log in';
+                }
+            });
+            
+            // Function to check requirements status
+            async function checkRequirementsStatus(studentId) {
+                try {
+                    const { getDoc, doc } = await import('https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js');
+                    const db = firebase.firestore();
+                    
+                    const statusDoc = await getDoc(doc(db, 'students', studentId, 'requirements', 'status'));
+                    if (statusDoc.exists()) {
+                        const statusData = statusDoc.data();
+                        return !Object.values(statusData).some(status => status === 'Missing');
+                    }
+                    return false;
+                } catch (error) {
+                    console.error('Error checking requirements:', error);
+                    return false;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
